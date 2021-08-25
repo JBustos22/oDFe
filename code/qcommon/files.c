@@ -295,7 +295,7 @@ static	cvar_t		*fs_debug;
 static	cvar_t		*fs_homepath;
 
 static	cvar_t		*fs_steampath;
-
+static	cvar_t		*fs_include; // Cyberstorm - Optional extra path.
 static	cvar_t		*fs_basepath;
 static	cvar_t		*fs_basegame;
 static	cvar_t		*fs_copyfiles;
@@ -4647,6 +4647,7 @@ static void FS_Startup( void ) {
 	fs_copyfiles = Cvar_Get( "fs_copyfiles", "0", CVAR_INIT );
 	fs_basepath = Cvar_Get( "fs_basepath", Sys_DefaultBasePath(), CVAR_INIT | CVAR_PROTECTED | CVAR_PRIVATE );
 	fs_basegame = Cvar_Get( "fs_basegame", BASEGAME, CVAR_INIT | CVAR_PROTECTED );
+	fs_include = Cvar_Get("fs_include", "", CVAR_INIT); // Cyberstorm
 	fs_steampath = Cvar_Get( "fs_steampath", "", CVAR_INIT | CVAR_PROTECTED | CVAR_PRIVATE );
 
 #ifndef USE_HANDLE_CACHE
@@ -4710,6 +4711,13 @@ static void FS_Startup( void ) {
 		if ( fs_basepath->string[0] ) {
 			FS_AddGameDirectory( fs_basepath->string, fs_gamedirvar->string );
 		}
+
+		// Cyberstorm
+		if (fs_include->string[0]) {
+			FS_AddGameDirectory(fs_basepath->string, fs_include->string);
+		}
+		// !Cyberstorm
+		
 		if ( fs_homepath->string[0] && Q_stricmp( fs_homepath->string, fs_basepath->string ) ) {
 			FS_AddGameDirectory( fs_homepath->string, fs_gamedirvar->string );
 		}
