@@ -3824,7 +3824,7 @@ static void CL_InitGLimp_Cvars( void )
 	// shared with renderer:
 	cl_stencilbits = Cvar_Get( "r_stencilbits", "8", CVAR_ARCHIVE_ND | CVAR_LATCH );
 	Cvar_CheckRange( cl_stencilbits, "0", "8", CV_INTEGER );
-	Cvar_SetDescription( cl_stencilbits, "Stencil buffer size, value decreases Z-buffer depth." );
+	Cvar_SetDescription( cl_stencilbits, "Stencil buffer size, required to be 8 for stencil shadows." );
 	cl_depthbits = Cvar_Get( "r_depthbits", "0", CVAR_ARCHIVE_ND | CVAR_LATCH );
 	Cvar_CheckRange( cl_depthbits, "0", "32", CV_INTEGER );
 	Cvar_SetDescription( cl_depthbits, "Sets precision of Z-buffer." );
@@ -3930,8 +3930,8 @@ void CL_Init( void ) {
 	Cvar_SetDescription( cl_forceavidemo, "Forces all demo recording into a sequence of screenshots in TGA format." );
 
 	cl_aviPipeFormat = Cvar_Get( "cl_aviPipeFormat",
-		"-preset medium -crf 23 -vcodec libx264 -flags +cgop -pix_fmt yuvj420p "
-		"-bf 2 -codec:a aac -strict -2 -b:a 160k -movflags faststart",
+		"-preset medium -crf 23 -c:v libx264 -flags +cgop -pix_fmt yuvj420p "
+		"-bf 2 -c:a aac -strict -2 -b:a 160k -movflags faststart",
 		CVAR_ARCHIVE );
 	Cvar_SetDescription( cl_aviPipeFormat, "Encoder parameters used for \\video-pipe." );
 
