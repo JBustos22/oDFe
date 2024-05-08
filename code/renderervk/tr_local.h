@@ -1266,6 +1266,8 @@ typedef struct {
 #endif
 
 	qboolean				vertexLightingAllowed;
+
+    vec2_t					cgamefov;
 } trGlobals_t;
 
 
