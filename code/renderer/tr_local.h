@@ -1184,6 +1184,8 @@ typedef struct {
 
 	qboolean				vertexLightingAllowed;
 
+    vec2_t					cgamefov;
+
 } trGlobals_t;
 
 extern backEndState_t	backEnd;
